@@ -22,6 +22,6 @@ The project has three resource models (user, post, comment) with polymorphic rel
 ![login](https://user-images.githubusercontent.com/28041087/193830399-6749b0ce-88c8-44fa-9648-e3de803f9fb6.png)
 ![index](https://user-images.githubusercontent.com/28041087/193830459-2099e527-c2e9-4f9c-b1fa-78fbea10b414.png)
 ![show](https://user-images.githubusercontent.com/28041087/193830581-ac8fc61c-1712-4b99-8d12-3d4a75e93d20.png)
-![admin](https://user-images.githubusercontent.com/28041087/193830639-8df84ed4-9486-4ccf-a604-87f5f6cea8af.png)
+![admin-post-add](https://user-images.githubusercontent.com/28041087/193832087-6bbbd9e5-d8d5-49c4-a1e8-b842b6e023f3.png)
 ![admin-posts](https://user-images.githubusercontent.com/28041087/193830681-0bf93e34-a865-498b-bbbe-fc9b2941a23f.png)
 ![profile](https://user-images.githubusercontent.com/28041087/193830735-fb61122a-2051-4eb7-9d31-0e2aaf1e95a5.png)
