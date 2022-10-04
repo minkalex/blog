@@ -22,6 +22,7 @@ class UsersController extends Controller
             ->orderBy('last_name')
             ->orderBy('name')
             ->get();
+
         return view('authors')
             ->with('objUsers', $objUsers);
     }
@@ -50,15 +51,16 @@ class UsersController extends Controller
     {
         $validated = $request->all();
         $validated['password'] = Hash::make($request->password);
+
         User::create($validated);
+
         return redirect('/login');
     }
 
     /**
-     * @param  User  $user
      * @return View
      */
-    public function show(User $user): View
+    public function show(): View
     {
         return view('admin.profile_info');
     }
@@ -74,8 +76,8 @@ class UsersController extends Controller
         if (Auth::user()->cannot('update', $user)) {
             abort(403);
         }
-        return view('admin.profile_edit')
-            ->with(compact('user'));
+
+        return view('admin.profile_edit')->with(compact('user'));
     }
 
     /**
@@ -90,11 +92,15 @@ class UsersController extends Controller
         if ($request->filled('password')) {
             $user->password = Hash::make($request->password);
         }
+
         $user->last_name = $request->last_name;
         $user->name = $request->name;
         $user->email = $request->email;
+
         $user->save();
+
         $request->session()->flash('profile_edited', 'Ваши данные успешно обновлены!');
+
         return redirect()->route('profile');
     }
 
@@ -112,9 +118,9 @@ class UsersController extends Controller
 
         if (false !== str_contains(url()->previous(), 'profile')) {
             return redirect()->route('main');
-        } else {
-            return back();
         }
+
+        return back();
     }
 
     /**
@@ -123,10 +129,7 @@ class UsersController extends Controller
      */
     public function authenticate(Request $request): View|RedirectResponse
     {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
+        $credentials = $request->validate(['email' => ['required', 'email'], 'password' => ['required'],]);
 
         if ($request->input('remember-me')) {
             $needUserRemember = true;
@@ -136,11 +139,10 @@ class UsersController extends Controller
 
         if (Auth::attempt($credentials, $needUserRemember)) {
             $request->session()->regenerate();
+
             return redirect()->route('main');
         }
 
-        return back()->withErrors([
-            'email' => 'Неверный логин и/или пароль.',
-        ])->onlyInput('email');
+        return back()->withErrors(['email' => 'Invalid username and/or password.',])->onlyInput('email');
     }
 }
